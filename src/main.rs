@@ -1,4 +1,8 @@
-use std::io::{BufWriter, Write};
+use std::{
+    io::{BufWriter, Write},
+    os::unix::process::CommandExt,
+    process::Command,
+};
 
 use serde_json::json;
 use util::grid::{Direction, Grid, GridPos};
@@ -126,5 +130,11 @@ fn main() {
     serde_json::to_writer(&mut bufwriter, &blueprint).expect("writing json");
     bufwriter.flush().expect("writing json");
     drop(bufwriter);
-    println!("{}", bpfilepath.display());
+    eprintln!("blueprint in {}", bpfilepath.display());
+    Command::new("ripdrag")
+        .args(["-s", "64", "-x"])
+        .arg(bpfilepath)
+        .spawn()
+        .expect("running ripdrag")
+        .wait();
 }
