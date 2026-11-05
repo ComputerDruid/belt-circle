@@ -8,4 +8,6 @@ resolver = "3"
 members = ["util"]
 
 [dependencies]
+serde_json = "1.0.154"
+tempfile = "3.27.0"
 util = { path = "./util" }
