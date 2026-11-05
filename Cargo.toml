@@ -1,0 +1,11 @@
+[package]
+name = "pixel-circle"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+resolver = "3"
+members = ["util"]
+
+[dependencies]
+util = { path = "./util" }
